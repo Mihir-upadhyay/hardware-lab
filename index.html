@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mihir Upadhyay · Hardware Lab</title>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+<style>
+  :root{--bg:#050b14;--panel:#0a1626;--line:#12324a;--cyan:#37e6ff;--amber:#e8a23a;--green:#5dffa8;--dim:#7d93a8}
+  *{box-sizing:border-box}
+  body{margin:0;padding:32px 20px 60px;background:var(--bg);color:#dff6ff;
+    font-family:'JetBrains Mono','Fira Code',Consolas,monospace;
+    background-image:linear-gradient(#0e2236 1px,transparent 1px),linear-gradient(90deg,#0e2236 1px,transparent 1px);
+    background-size:20px 20px}
+  header{max-width:1100px;margin:0 auto 28px}
+  h1{margin:0;font-size:24px;color:var(--cyan);text-shadow:0 0 10px var(--cyan)}
+  .sub{color:var(--dim);font-size:13px;margin-top:6px}
+  .grid{max-width:1100px;margin:0 auto;display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:14px;scroll-margin-top:20px;transition:border-color .2s,box-shadow .2s}
+  .card:hover,.card:target{border-color:var(--cyan);box-shadow:0 0 18px rgba(55,230,255,.25)}
+  .card::before,.card::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--amber)}
+  .card::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .card::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+  .tag{display:flex;justify-content:space-between;font-size:12px;color:var(--dim)}
+  .tag b{color:var(--green)}
+  h2{margin:6px 0 0;font-size:15px}
+  model-viewer{width:100%;height:320px;background:transparent;--poster-color:transparent}
+  .hint{font-size:11px;color:var(--dim);text-align:center}
+  footer{max-width:1100px;margin:30px auto 0;font-size:11px;color:var(--dim);line-height:1.7}
+  footer a{color:var(--cyan)}
+</style>
+</head>
+<body>
+<header>
+  <h1>HARDWARE LAB</h1>
+  <div class="sub">boards i have built with &middot; hover to spin &middot; drag to rotate &middot; scroll to zoom</div>
+</header>
+
+<main class="grid">
+  <section class="card" id="rpi5">
+    <div class="tag"><span>[ 01 ]</span><b>ONLINE</b></div>
+    <h2>Raspberry Pi 5</h2>
+    <model-viewer src="models/raspberry-pi-5.glb" alt="Raspberry Pi 5 3D model"
+      camera-controls rotation-per-second="40deg" interaction-prompt="none"
+      shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
+    <div class="hint">hover = spin</div>
+  </section>
+
+  <section class="card" id="jetson">
+    <div class="tag"><span>[ 02 ]</span><b>ONLINE</b></div>
+    <h2>Jetson Nano</h2>
+    <model-viewer src="models/jetson-nano.glb" alt="Jetson Nano 3D model"
+      camera-controls rotation-per-second="40deg" interaction-prompt="none"
+      shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
+    <div class="hint">hover = spin</div>
+  </section>
+
+  <section class="card" id="arduino">
+    <div class="tag"><span>[ 03 ]</span><b>ONLINE</b></div>
+    <h2>Arduino Uno</h2>
+    <model-viewer src="models/arduino-uno.glb" alt="Arduino Uno 3D model"
+      camera-controls rotation-per-second="40deg" interaction-prompt="none"
+      shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
+    <div class="hint">hover = spin</div>
+  </section>
+
+  <section class="card" id="esp32s3">
+    <div class="tag"><span>[ 04 ]</span><b>ONLINE</b></div>
+    <h2>ESP32-S3</h2>
+    <model-viewer src="models/esp32-s3.glb" alt="ESP32-S3 3D model"
+      camera-controls rotation-per-second="40deg" interaction-prompt="none"
+      shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
+    <div class="hint">hover = spin</div>
+  </section>
+</main>
+
+<footer>
+  <a href="https://github.com/Mihir-upadhyay">github.com/Mihir-upadhyay</a><br>
+  3D models via Sketchfab. Credits:
+  <!-- add one line per model: "Title" by Author, license, link -->
+</footer>
+
+<script>
+  document.querySelectorAll('model-viewer').forEach(function (m) {
+    m.addEventListener('mouseenter', function () { m.autoRotate = true; });
+    m.addEventListener('mouseleave', function () { m.autoRotate = false; });
+  });
+</script>
+</body>
+</html>
