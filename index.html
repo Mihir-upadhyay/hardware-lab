@@ -12,9 +12,14 @@
     font-family:'JetBrains Mono','Fira Code',Consolas,monospace;
     background-image:linear-gradient(#0e2236 1px,transparent 1px),linear-gradient(90deg,#0e2236 1px,transparent 1px);
     background-size:20px 20px}
-  header{max-width:1100px;margin:0 auto 28px}
+  header{max-width:1100px;margin:0 auto 20px}
   h1{margin:0;font-size:24px;color:var(--cyan);text-shadow:0 0 10px var(--cyan)}
   .sub{color:var(--dim);font-size:13px;margin-top:6px}
+  .filters{max-width:1100px;margin:0 auto 22px;display:flex;gap:10px;flex-wrap:wrap}
+  .filters button{font:inherit;font-size:12px;color:var(--dim);background:transparent;border:1px solid var(--line);
+    border-radius:999px;padding:6px 14px;cursor:pointer;transition:all .2s}
+  .filters button:hover{color:var(--cyan);border-color:var(--cyan)}
+  .filters button.on{color:var(--bg);background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 12px rgba(55,230,255,.4)}
   .grid{max-width:1100px;margin:0 auto;display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
   .card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;
     padding:14px;scroll-margin-top:20px;transition:border-color .2s,box-shadow .2s}
@@ -22,6 +27,7 @@
   .card::before,.card::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--amber)}
   .card::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
   .card::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+  .card.hide{display:none}
   .tag{display:flex;justify-content:space-between;font-size:12px;color:var(--dim)}
   .tag b{color:var(--green)}
   h2{margin:6px 0 0;font-size:15px}
@@ -34,12 +40,19 @@
 <body>
 <header>
   <h1>HARDWARE LAB</h1>
-  <div class="sub">boards i have built with &middot; hover to spin &middot; drag to rotate &middot; scroll to zoom</div>
+  <div class="sub">boards, sensors and actuators i have built with &middot; hover to spin &middot; drag to rotate &middot; scroll to zoom</div>
 </header>
 
+<nav class="filters">
+  <button class="on" data-f="all">ALL</button>
+  <button data-f="board">BOARDS</button>
+  <button data-f="sensor">SENSORS</button>
+  <button data-f="actuator">ACTUATORS</button>
+</nav>
+
 <main class="grid">
-  <section class="card" id="rpi5">
-    <div class="tag"><span>[ 01 ]</span><b>ONLINE</b></div>
+  <section class="card" id="rpi5" data-group="board">
+    <div class="tag"><span>[ 01 ] BOARD</span><b>ONLINE</b></div>
     <h2>Raspberry Pi 5</h2>
     <model-viewer src="models/raspberry-pi-5.glb" alt="Raspberry Pi 5 3D model"
       camera-controls rotation-per-second="40deg" interaction-prompt="none"
@@ -47,8 +60,8 @@
     <div class="hint">hover = spin</div>
   </section>
 
-  <section class="card" id="jetson">
-    <div class="tag"><span>[ 02 ]</span><b>ONLINE</b></div>
+  <section class="card" id="jetson" data-group="board">
+    <div class="tag"><span>[ 02 ] BOARD</span><b>ONLINE</b></div>
     <h2>Jetson Nano</h2>
     <model-viewer src="models/jetson-nano.glb" alt="Jetson Nano 3D model"
       camera-controls rotation-per-second="40deg" interaction-prompt="none"
@@ -56,8 +69,8 @@
     <div class="hint">hover = spin</div>
   </section>
 
-  <section class="card" id="arduino">
-    <div class="tag"><span>[ 03 ]</span><b>ONLINE</b></div>
+  <section class="card" id="arduino" data-group="board">
+    <div class="tag"><span>[ 03 ] BOARD</span><b>ONLINE</b></div>
     <h2>Arduino Uno</h2>
     <model-viewer src="models/arduino-uno.glb" alt="Arduino Uno 3D model"
       camera-controls rotation-per-second="40deg" interaction-prompt="none"
@@ -65,10 +78,73 @@
     <div class="hint">hover = spin</div>
   </section>
 
-  <section class="card" id="esp32s3">
-    <div class="tag"><span>[ 04 ]</span><b>ONLINE</b></div>
+  <section class="card" id="esp32s3" data-group="board">
+    <div class="tag"><span>[ 04 ] BOARD</span><b>ONLINE</b></div>
     <h2>ESP32-S3</h2>
     <model-viewer src="models/esp32-s3.glb" alt="ESP32-S3 3D model"
+      camera-controls rotation-per-second="40deg" interaction-prompt="none"
+      shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
+    <div class="hint">hover = spin</div>
+  </section>
+
+  <section class="card" id="nano" data-group="board">
+    <div class="tag"><span>[ 05 ] BOARD</span><b>ONLINE</b></div>
+    <h2>Arduino Nano</h2>
+    <model-viewer src="models/arduino-nano.glb" alt="Arduino Nano 3D model"
+      camera-controls rotation-per-second="40deg" interaction-prompt="none"
+      shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
+    <div class="hint">hover = spin</div>
+  </section>
+
+  <section class="card" id="rain" data-group="sensor">
+    <div class="tag"><span>[ 06 ] SENSOR</span><b>ONLINE</b></div>
+    <h2>Rain Sensor</h2>
+    <model-viewer src="models/rain-sensor.glb" alt="Rain Sensor 3D model"
+      camera-controls rotation-per-second="40deg" interaction-prompt="none"
+      shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
+    <div class="hint">hover = spin</div>
+  </section>
+
+  <section class="card" id="ir" data-group="sensor">
+    <div class="tag"><span>[ 07 ] SENSOR</span><b>ONLINE</b></div>
+    <h2>IR Sensor</h2>
+    <model-viewer src="models/ir-sensor.glb" alt="IR Sensor 3D model"
+      camera-controls rotation-per-second="40deg" interaction-prompt="none"
+      shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
+    <div class="hint">hover = spin</div>
+  </section>
+
+  <section class="card" id="gas" data-group="sensor">
+    <div class="tag"><span>[ 08 ] SENSOR</span><b>ONLINE</b></div>
+    <h2>Gas Sensor</h2>
+    <model-viewer src="models/gas-sensor.glb" alt="Gas Sensor 3D model"
+      camera-controls rotation-per-second="40deg" interaction-prompt="none"
+      shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
+    <div class="hint">hover = spin</div>
+  </section>
+
+  <section class="card" id="pir" data-group="sensor">
+    <div class="tag"><span>[ 09 ] SENSOR</span><b>ONLINE</b></div>
+    <h2>PIR Sensor</h2>
+    <model-viewer src="models/pir-sensor.glb" alt="PIR Sensor 3D model"
+      camera-controls rotation-per-second="40deg" interaction-prompt="none"
+      shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
+    <div class="hint">hover = spin</div>
+  </section>
+
+  <section class="card" id="ultrasonic" data-group="sensor">
+    <div class="tag"><span>[ 10 ] SENSOR</span><b>ONLINE</b></div>
+    <h2>Ultrasonic</h2>
+    <model-viewer src="models/ultrasonic-sensor.glb" alt="Ultrasonic 3D model"
+      camera-controls rotation-per-second="40deg" interaction-prompt="none"
+      shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
+    <div class="hint">hover = spin</div>
+  </section>
+
+  <section class="card" id="servo" data-group="actuator">
+    <div class="tag"><span>[ 11 ] ACTUATOR</span><b>ONLINE</b></div>
+    <h2>Servo Motor</h2>
+    <model-viewer src="models/servo-motor.glb" alt="Servo Motor 3D model"
       camera-controls rotation-per-second="40deg" interaction-prompt="none"
       shadow-intensity="1" exposure="1.1" environment-image="neutral" loading="lazy"></model-viewer>
     <div class="hint">hover = spin</div>
@@ -85,6 +161,17 @@
   document.querySelectorAll('model-viewer').forEach(function (m) {
     m.addEventListener('mouseenter', function () { m.autoRotate = true; });
     m.addEventListener('mouseleave', function () { m.autoRotate = false; });
+  });
+  var btns = document.querySelectorAll('.filters button');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      btns.forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      var f = b.dataset.f;
+      document.querySelectorAll('.card').forEach(function (c) {
+        c.classList.toggle('hide', f !== 'all' && c.dataset.group !== f);
+      });
+    });
   });
 </script>
 </body>
